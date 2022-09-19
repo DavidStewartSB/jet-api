@@ -26,7 +26,9 @@ const port = process.env.PORT || 3000
 
 app.use(`${api}/products`, productsRoutes)
 app.use(`${api}/categories`, categoriesRoutes)
-
+router.get('/', async (req, res) => {
+    res.send('olá')
+})
 //Connect Database
 mongoose.connect(process.env.CONNECTION_STRING).then(() => {
     console.log('Conexão com o banco: Completa!')
