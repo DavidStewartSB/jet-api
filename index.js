@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bodyParser = require('body-Parser')    
 const errorHandler = require('./helpers/error-handle')
 
 require('dotenv/config')
@@ -10,6 +11,7 @@ require('dotenv/config')
 app.use(cors());
 app.options('*', cors());
 //Middlewares
+app.use(bodyparser.json())
 app.use(express.json())
 app.use(morgan('tiny')) //log das request no terminal
 app.use('/public/upload', express.static(__dirname + '/public/upload'))
