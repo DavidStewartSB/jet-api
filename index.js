@@ -3,7 +3,6 @@ const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const bodyParser = require('body-Parser')    
 const errorHandler = require('./helpers/error-handle')
 
 require('dotenv/config')
@@ -11,7 +10,6 @@ require('dotenv/config')
 app.use(cors());
 app.options('*', cors());
 //Middlewares
-app.use(bodyparser.json())
 app.use(express.json())
 app.use(morgan('tiny')) //log das request no terminal
 app.use('/public/upload', express.static(__dirname + '/public/upload'))
@@ -20,15 +18,14 @@ app.use(errorHandler)
 //Routes
 const productsRoutes = require('./routes/products')
 const categoriesRoutes = require('./routes/categories')
+const homeRoute = require('./routes/home')
 
 const api = process.env.API_URL;
 const port = process.env.PORT || 3000
 
 app.use(`${api}/products`, productsRoutes)
 app.use(`${api}/categories`, categoriesRoutes)
-router.get('/', async (req, res) => {
-    res.send('olá')
-})
+app.use('/', homeRoute)
 //Connect Database
 mongoose.connect(process.env.CONNECTION_STRING).then(() => {
     console.log('Conexão com o banco: Completa!')
