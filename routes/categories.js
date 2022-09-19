@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
 
     category = await category.save() //mongoose saved
     if(!category){
-        return res.status(404).send('Erro ao criar categoria')
+        return res.status(404).send('Erro ao Criar categoria!')
     } 
     res.send(category)
 })
