@@ -32,5 +32,6 @@ mongoose.connect(process.env.CONNECTION_STRING).then(() => {
 })
 //Servidor local
 app.listen(3000, () => {
+    res.send('Test')
     console.log('Server rodando na porta http://localhost:3000')
 })
