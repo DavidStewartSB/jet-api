@@ -33,6 +33,6 @@ mongoose.connect(process.env.CONNECTION_STRING).then(() => {
     console.log(err)
 })
 //Servidor local
-app.listen(port, () => {
-    console.log('Server rodando na porta http://localhost:3000')
-})
+app.listen(process.env.PORT || 3000, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
