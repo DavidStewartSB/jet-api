@@ -20,6 +20,7 @@ const productsRoutes = require('./routes/products')
 const categoriesRoutes = require('./routes/categories')
 
 const api = process.env.API_URL;
+const port = process.env.PORT || 3000
 
 app.use(`${api}/products`, productsRoutes)
 app.use(`${api}/categories`, categoriesRoutes)
@@ -31,6 +32,6 @@ mongoose.connect(process.env.CONNECTION_STRING).then(() => {
     console.log(err)
 })
 //Servidor local
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('Server rodando na porta http://localhost:3000')
 })
