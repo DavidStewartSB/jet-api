@@ -24,6 +24,20 @@ const port = process.env.PORT || 3000
 
 app.use(`${api}/products`, productsRoutes)
 app.use(`${api}/categories`, categoriesRoutes)
+//cors
+const issue2options = {
+    origin: true,
+    methods: ["POST"],
+    credentials: true,
+    maxAge: 3600
+  };
+  app.options("/issue-2", cors(issue2options));
+  app.post("/issue-2", cors(issue2options), (req, res) => {
+    console.info("POST /issue-2");
+    res.json({
+      text: "Issue #2 is fixed."
+    });
+  });
 //Connect Database
 mongoose.connect(process.env.CONNECTION_STRING).then(() => {
     console.log('Conexão com o banco: Completa!')
