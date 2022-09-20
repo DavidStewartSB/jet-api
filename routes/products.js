@@ -2,6 +2,7 @@ const {Product} = require('../models/product')
 const express = require('express')
 const router = express.Router()
 const multer = require('multer')
+var cors = require('cors')
 const mongoose = require('mongoose')
 const { Category } = require('../models/category')
 
@@ -12,6 +13,10 @@ const FILE_TYPE_MAP = {
   'image/webp': 'webp'
 }
 
+var corsOptions = {
+  origin: 'https://jet-api.vercel.app/api/v1/products',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 //Upload das imagens
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -68,7 +73,7 @@ router.get('get/promo/:count', async(req, res) => {
   res.send(products)
 })
 
-router.post('/', uploadOptions.single('image'), async (req,res) => {
+router.post('/',cors(corsOptions), uploadOptions.single('image'), async (req,res) => {
   //Vinculo de categoria por ID
   const category = await Category.findById(req.body.category)
   if(!category) return res.status(400).send('Categoria invalida')
