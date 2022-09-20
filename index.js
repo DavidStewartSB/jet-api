@@ -22,8 +22,8 @@ const categoriesRoutes = require('./routes/categories')
 const api = process.env.API_URL;
 const port = process.env.PORT || 3000
 
-app.use(`${api}/products`, productsRoutes)
-app.use(`${api}/categories`, categoriesRoutes)
+app.use(`/products`, productsRoutes)
+app.use(`/categories`, categoriesRoutes)
 //Connect Database
 mongoose.connect(process.env.CONNECTION_STRING).then(() => {
     console.log('Conexão com o banco: Completa!')
